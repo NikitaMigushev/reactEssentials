@@ -2,7 +2,8 @@ import { calculateInvestmentResults, formatter } from '../util/investment.js';
 
 
 export default function Results({ input }) {
-  const results = [];
+    const results = [];
+
   calculateInvestmentResults(input, results);
 
   if (results.length === 0) {
