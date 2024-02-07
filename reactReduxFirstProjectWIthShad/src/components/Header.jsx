@@ -1,16 +1,24 @@
 import {RxHamburgerMenu} from "react-icons/rx";
 import {useState} from "react";
 import ROUTES from "@/constants/routs.js";
+import {useDispatch, useSelector} from "react-redux";
+import {authActions} from "@/store/index.js";
 
 export default function Header() {
+    const dispatch = useDispatch();
     const [isMobileMenuShown, setIsMobileMenuShown] = useState();
+    const isAuth = useSelector(state => state.auth.isAuthenticated);
+
+    const authHandler = () => {
+        dispatch(authActions.logout());
+    };
 
     function handleClickBurger() {
         setIsMobileMenuShown(!isMobileMenuShown);
     }
 
     return (
-        <nav className="flex flex-wrap justify-left items-center p-3 bg-gray-100 space-x-5">
+        <nav className="flex flex-wrap justify-left items-center p-3 border-b space-x-5">
             {/* Burger button */}
             <div className="lg:hidden">
                 <button
@@ -27,7 +35,7 @@ export default function Header() {
                         <h1 className="text-xl font-semibold">WBLight</h1>
                     </a>
                 </div>
-                <div className="cursor-pointer">Войти</div>
+                <div className="cursor-pointer" onClick={authHandler}>{isAuth ? "Выход" : "Вход"}</div>
             </div>
             {/* Menu list for mobile */}
             <div
