@@ -8,28 +8,28 @@ import {
 } from "@/components/ui/card"
 import {Button} from "@/components/ui/button.jsx";
 import {useDispatch, useSelector} from "react-redux";
+import {counterActions} from "@/store/index.js";
 
 export default function Counter() {
     const dispatch = useDispatch();
-    const counter = useSelector(state => state.counter);
-    const toggle = useSelector(state => state.showCounter)
+    const counter = useSelector((state) => state.counter);
+    const show = useSelector((state) => state.showCounter);
 
     const incrementHandler = () => {
-        dispatch({type: 'increment'});
-    }
-
-    const decrementHandler = () => {
-        dispatch({type: 'decrement'});
-    }
+        dispatch(counterActions.increment());
+    };
 
     const increaseHandler = () => {
-        dispatch({type: 'increase', amount: 5})
-    }
+        dispatch(counterActions.increase(10)); // { type: SOME_UNIQUE_IDENTIFIER, payload: 10 }
+    };
+
+    const decrementHandler = () => {
+        dispatch(counterActions.decrement());
+    };
 
     const toggleCounterHandler = () => {
-        dispatch({type: 'toggle'})
-        console.log(toggle);
-    }
+        dispatch(counterActions.toggleCounter());
+    };
 
 
     return (
@@ -40,7 +40,7 @@ export default function Counter() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col">
-                        {toggle && <p>Counter: {counter}</p>}
+                        {show && <p>Counter: {counter}</p>}
                         <div className="flex space-x-4 mt-4">
                             <div>
                                 <Button onClick={incrementHandler}>Increment</Button>
