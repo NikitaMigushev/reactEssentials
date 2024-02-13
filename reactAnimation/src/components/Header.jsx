@@ -23,7 +23,7 @@ export default function Header() {
             <header id="main-header">
                 <h1>Your Challenges</h1>
                 <motion.button onClick={handleStartAddNewChallenge} className="button"
-                whileHover={{scale: 1.05}}
+                whileHover={{scale: 1.05, backgroundColor: '#8b11f0'}}
                 >
                     Add Challenge
                 </motion.button>
